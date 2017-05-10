@@ -6,18 +6,12 @@
     android:id="@+id/cl_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.smshareef.touristguide.LoginActivity">
+    tools:context="com.smshareef.touristguide.activities.LoginActivity">
 
     <ScrollView
         android:id="@+id/sv_login"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -34,6 +28,7 @@
 
             <ImageView
                 android:id="@+id/iv_login_welcome"
+                android:contentDescription="@string/login_image_desc"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_alignParentTop="true"
@@ -53,7 +48,7 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="64dp"
-                android:text="Welcome"
+                android:text="@string/login_welcome"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 android:textColor="@android:color/background_light"
                 android:textSize="40sp" />
@@ -64,7 +59,7 @@
                 android:layout_height="45dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="200dp"
-                android:hint="User ID" />
+                android:hint="@string/login_userid_hint" />
 
             <EditText
                 android:id="@+id/et_login_password"
@@ -73,7 +68,7 @@
                 android:layout_below="@id/et_login_userid"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:hint="Password"
+                android:hint="@string/login_password_hint"
                 android:inputType="textPassword" />
 
             <Button
@@ -85,8 +80,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:background="@color/colorPrimaryDark"
-                android:backgroundTint="@color/colorPrimary"
-                android:text="Login" />
+                android:text="@string/login_button" />
 
 
             <Button
@@ -97,7 +91,7 @@
                 android:layout_below="@id/bt_login"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:text="Forgot password" />
+                android:text="@string/login_forgot_pwd_button" />
 
         </RelativeLayout>
     </ScrollView>

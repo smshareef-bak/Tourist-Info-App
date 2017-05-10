@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Tourist Guide</string>
+    <string name="login_welcome">Welcome</string>
+    <string name="login_userid_hint">User ID</string>
+    <string name="login_password_hint">Password</string>
+    <string name="login_button">Login</string>
+    <string name="login_forgot_pwd_button">Forgot Password</string>
+    <string name="login_image_desc">Login cover</string>
 </resources>
