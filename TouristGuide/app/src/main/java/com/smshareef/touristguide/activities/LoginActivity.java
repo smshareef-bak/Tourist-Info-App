@@ -1,5 +1,6 @@
 package com.smshareef.touristguide.activities;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,7 @@ public class LoginActivity extends AppCompatActivity implements OnLoginDataReady
     private EditText mLoginUserIDEt;
     private EditText mLoginPasswordEt;
     private Button mForgotPasswordBt;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,9 @@ public class LoginActivity extends AppCompatActivity implements OnLoginDataReady
                 loadData();
                 if(userID.equals(uid)) {
                     if(password.equals(pwd)) {
-                        Toast.makeText(LoginActivity.this,"Logging in...",Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this,"Successfully Logged in...",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                        LoginActivity.this.startActivity(intent);
                     } else if(password.equals("")){
                         Toast.makeText(LoginActivity.this,"Please enter password",Toast.LENGTH_LONG).show();
                     } else {

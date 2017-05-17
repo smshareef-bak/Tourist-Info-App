@@ -6,4 +6,11 @@
     <string name="login_button">Login</string>
     <string name="login_forgot_pwd_button">Forgot Password</string>
     <string name="login_image_desc">Login cover</string>
+    <string name="title_activity_main">Major Cities</string>
+    <string name="action_settings">Settings</string>
+    <string name="permission_storage_rationale">"Storage permissions are needed for picking images from gallery"
+    </string>
+    <string name="write_permission_granted">Write permission granted !</string>
+    <string name="read_permission_granted">Read permission granted !</string>
+    <string name="both_permission_granted">Read/Write permission granted !</string>
 </resources>
