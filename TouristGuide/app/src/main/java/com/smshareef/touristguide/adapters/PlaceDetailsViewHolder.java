@@ -42,8 +42,8 @@ public class PlaceDetailsViewHolder extends RecyclerView.ViewHolder{
                 .load(place.getPlaceImage())
                 .centerCrop()
                 .resize(targetWidth, targetHeight)
-                .placeholder(R.mipmap.ic_launcher_round)
-                .error(R.mipmap.ic_launcher_round)
+                .placeholder(R.mipmap.ic_launcher_round)// placeholder before loading images
+                .error(R.mipmap.ic_launcher_round) // Image to be displayed in case of error
                 .into(placeImage);
 
 

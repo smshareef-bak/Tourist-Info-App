@@ -1,7 +1,10 @@
 package com.smshareef.touristguide.activities;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,6 +29,7 @@ import java.util.ArrayList;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+import static com.smshareef.touristguide.utils.AppConstants.KEY_PLACE;
 import static com.smshareef.touristguide.utils.PermissionUtils.hasPermission;
 
 
@@ -41,6 +45,8 @@ public class MainActivity extends AppCompatActivity implements PlaceDataListener
     private static final int REQUEST_WRITE_STORAGE = 2;
     private final static int ALL_PERMISSION_RESULT = 107;
 
+    private static final int REQUEST_CODE = 101;
+
     private static final int SPAN_COUNT = 3;
 
     //----------------------------------------------------------------------------------------------
@@ -49,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements PlaceDataListener
     private FloatingActionButton fab;
 
     private RecyclerView recyclerView;
+
     //----------------------------------------------------------------------------------------------
     //Other fields
     //----------------------------------------------------------------------------------------------
@@ -70,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements PlaceDataListener
         placeRecyclerAdapter = new PlaceRecyclerAdapter(this);
 
         recyclerView.setHasFixedSize(true);
+        placeRecyclerAdapter.setOnRecyclerViewItemClickListener(this);
         recyclerView.setAdapter(placeRecyclerAdapter);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, GRID_COLUMN_COUNT);
@@ -244,15 +252,40 @@ public class MainActivity extends AppCompatActivity implements PlaceDataListener
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick( View v) {
         if (v.getId() == R.id.fab) {
+            Intent intent = new Intent(MainActivity.this, AddPlaceActivity.class);
+            startActivityForResult(intent, REQUEST_CODE);
         }
     }
-
 
 
     @Override
     public void onItemClicked(Bundle bundle) {
 
+        Place place = bundle.getParcelable(KEY_PLACE);
+        String placeName = place.getPlaceName();
+        Uri placeImage = place.getPlaceImage();
+        Intent intent = new Intent(MainActivity.this,PlaceDetailsActivity.class);
+        intent.putExtra("Place_Name", placeName);
+        intent.putExtra("Place_Image", placeImage);
+        MainActivity.this.startActivity(intent);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_CODE) {
+            if(resultCode == Activity.RESULT_OK) {
+                Bundle b = data.getExtras();
+                if(b != null) {
+                    Place place = b.getParcelable("place");
+                    placeRecyclerAdapter.addData(place);
+                }
+            } else if (resultCode == 0) {
+                Toast.makeText(this, "Request Cancelled", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
 }

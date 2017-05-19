@@ -13,7 +13,7 @@ public class Place implements Parcelable {
     private String placeName;
     private Uri placeImage;
 
-    public Place(){
+    public Place() {
 
     }
 

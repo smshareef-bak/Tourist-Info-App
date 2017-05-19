@@ -8,7 +8,8 @@ import com.smshareef.touristguide.utils.PlaceUtils;
 
 import java.util.ArrayList;
 
-import static com.smshareef.touristguide.utils.AppConstants.IMAGE_DIR;
+import static com.smshareef.touristguide.utils.AppConstants.PLACES_IMAGE_DIR;
+import static com.smshareef.touristguide.utils.AppConstants.RESOURCES_DIR;
 
 /**
  * Created by smsha on 17-05-2017.
@@ -33,7 +34,7 @@ public class PlaceDataManager extends AsyncTask<Void, Void, ArrayList<Place>>{
 
     @Override
     protected ArrayList<Place> doInBackground(Void... params) {
-        return PlaceUtils.getAllImagesFromDir(IMAGE_DIR);
+        return PlaceUtils.getAllImagesFromDir(RESOURCES_DIR + "/" + PLACES_IMAGE_DIR);
     }
 
     @Override

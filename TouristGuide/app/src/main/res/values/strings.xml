@@ -13,4 +13,11 @@
     <string name="write_permission_granted">Write permission granted !</string>
     <string name="read_permission_granted">Read permission granted !</string>
     <string name="both_permission_granted">Read/Write permission granted !</string>
+    <string name="title_activity_place_details">PlaceDetailsActivity</string>
+    <string name="place_details_gallery_button">Gallery</string>
+    <string name="place_details_famous_places_button">Famous Places</string>
+    <string name="add_place">Add a new place</string>
+    <string name="add_place_bt_get_image">Select Image</string>
+    <string name="add_place_bt_save">Save</string>
+    <string name="add_place_desc">Place Name</string>
 </resources>

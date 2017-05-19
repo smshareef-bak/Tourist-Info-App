@@ -29,7 +29,9 @@ public class PlaceUtils {
 
         File directory = new File(path);
         if (!directory.exists()) {
-            Log.d(LOG_TAG, "Directory doesn't exist");
+            Log.d(LOG_TAG, "Directory doesn't exist! Now creating...");
+            File f = new File(android.os.Environment.getExternalStorageDirectory().getAbsolutePath()+"/",File.separator + dir);
+            f.mkdirs();
             return placeArrayList;
         }
         File[] files = directory.listFiles();
@@ -38,7 +40,6 @@ public class PlaceUtils {
             placeDetails.setPlaceName(file.getName());
             placeDetails.setPlaceImage(Uri.fromFile(file));
             placeArrayList.add(placeDetails);
-            Log.e("LOG", placeDetails.getPlaceName());
         }
 
         return placeArrayList;

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.smshareef.touristguide.activities.AddPlaceActivity"
+    app:theme="@style/AppTheme.NoActionBar">
+
+    <ImageView
+        android:id="@+id/addPlaceIv"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:elevation="1dp"
+        app:srcCompat="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/addPlaceTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:elevation="1dp"
+        android:text="@string/add_place"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textColor="@android:color/background_light"
+        android:textSize="36sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/addPlaceSv"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintLeft_toLeftOf="@+id/addPlaceIv"
+        app:layout_constraintRight_toRightOf="@+id/addPlaceIv"
+        app:layout_constraintTop_toTopOf="@+id/addPlaceIv" />
+
+    <ScrollView
+        android:id="@+id/addPlaceSv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addPlaceIv"
+        app:layout_constraintVertical_bias="0.0">
+
+    <RelativeLayout
+        android:id="@+id/addPlaceRl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hapticFeedbackEnabled="true"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/addPlaceEt"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="42dp"
+            android:hint="@string/add_place_desc"
+            android:inputType="text" />
+
+        <ImageView
+            android:id="@+id/addPlaceImagePreviewIv"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:layout_below="@+id/addPlaceEt"
+            android:layout_marginTop="21dp"
+            app:srcCompat="@mipmap/ic_launcher"
+            android:layout_centerInParent="true"/>
+
+        <Button
+            android:id="@+id/addPlaceSelectImageBt"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/addPlaceImagePreviewIv"
+            android:layout_centerInParent="true"
+            android:text="@string/add_place_bt_get_image" />
+
+        <Button
+            android:id="@+id/addPlaceSaveBt"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/addPlaceSelectImageBt"
+            android:layout_centerInParent="true"
+            android:text="@string/add_place_bt_save" />
+    </RelativeLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>

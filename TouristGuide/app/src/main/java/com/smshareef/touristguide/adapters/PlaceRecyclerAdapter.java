@@ -42,6 +42,7 @@ public class PlaceRecyclerAdapter extends RecyclerView.Adapter<PlaceDetailsViewH
 
     public void addData(Place place) {
         this.placeArrayList.add(place);
+        notifyItemInserted(this.placeArrayList.size());
         notifyItemChanged(this.placeArrayList.size());
     }
 
@@ -52,9 +53,9 @@ public class PlaceRecyclerAdapter extends RecyclerView.Adapter<PlaceDetailsViewH
     }
 
     @Override
-    public void onBindViewHolder(PlaceDetailsViewHolder holder, final int position) {
+    public void onBindViewHolder(final PlaceDetailsViewHolder holder, int position) {
 
-        final Place place = placeArrayList.get(position);
+        final Place place = placeArrayList.get(holder.getAdapterPosition());
 
         holder.bindData(place);
 
@@ -63,7 +64,7 @@ public class PlaceRecyclerAdapter extends RecyclerView.Adapter<PlaceDetailsViewH
             public void onClick(View v) {
                 if(null != onRecyclerViewItemClickListener) {
                     Bundle bundle = new Bundle();
-                    bundle.putInt(KEY_POSITION, position);
+                    bundle.putInt(KEY_POSITION, holder.getAdapterPosition());
                     bundle.putParcelable(KEY_PLACE, place);
                     onRecyclerViewItemClickListener.onItemClicked(bundle);
                 }
