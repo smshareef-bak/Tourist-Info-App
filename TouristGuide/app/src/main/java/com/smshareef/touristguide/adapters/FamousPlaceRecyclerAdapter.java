@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.smshareef.touristguide.R;
-import com.smshareef.touristguide.model.Place;
+import com.smshareef.touristguide.model.FamousPlace;
 import com.smshareef.touristguide.utils.OnRecyclerViewItemClickListener;
 
 import java.util.ArrayList;
@@ -20,43 +20,43 @@ import static com.smshareef.touristguide.utils.AppConstants.KEY_POSITION;
  * Created by smsha on 22-05-2017.
  */
 
-public class GalleryRecyclerAdapter extends RecyclerView.Adapter<GalleryImageViewHolder> {
+public class FamousPlaceRecyclerAdapter extends RecyclerView.Adapter<FamousPlaceViewHolder> {
 
     private LayoutInflater inflater;
-    private ArrayList<Place> galleryArrayList;
+    private ArrayList<FamousPlace> famousPlaceArrayList;
     private OnRecyclerViewItemClickListener onRecyclerViewItemClickListener;
 
-    public GalleryRecyclerAdapter(Context context) {
+    public FamousPlaceRecyclerAdapter(Context context) {
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.galleryArrayList = new ArrayList<>();
+        this.famousPlaceArrayList = new ArrayList<>();
     }
 
     public void setOnRecyclerViewItemClickListener(OnRecyclerViewItemClickListener onRecyclerViewItemClickListener) {
         this.onRecyclerViewItemClickListener = onRecyclerViewItemClickListener;
     }
 
-    public void setData(ArrayList<Place> galleryArrayList) {
-        this.galleryArrayList.addAll(galleryArrayList);
+    public void setData(ArrayList<FamousPlace> famousPlacesArrayList) {
+        this.famousPlaceArrayList.addAll(famousPlacesArrayList);
         notifyDataSetChanged();
     }
 
-    public void addData(Place gallery) {
-        this.galleryArrayList.add(gallery);
-        notifyItemInserted(this.galleryArrayList.size());
+    public void addData(FamousPlace famousPlaces) {
+        this.famousPlaceArrayList.add(famousPlaces);
+        notifyItemInserted(this.famousPlaceArrayList.size());
     }
 
     @Override
-    public GalleryImageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.row_content_gallery, parent, false);
-        return new GalleryImageViewHolder(view);
+    public FamousPlaceViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = inflater.inflate(R.layout.row_content_famous_places, parent, false);
+        return new FamousPlaceViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final GalleryImageViewHolder holder, int position) {
+    public void onBindViewHolder(final FamousPlaceViewHolder holder, int position) {
 
-        final Place gallery = galleryArrayList.get(holder.getAdapterPosition());
+        final FamousPlace famousPlaces = famousPlaceArrayList.get(holder.getAdapterPosition());
 
-        holder.bindData(gallery);
+        holder.bindData(famousPlaces);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +64,7 @@ public class GalleryRecyclerAdapter extends RecyclerView.Adapter<GalleryImageVie
                 if(null != onRecyclerViewItemClickListener) {
                     Bundle bundle = new Bundle();
                     bundle.putInt(KEY_POSITION, holder.getAdapterPosition());
-                    bundle.putParcelable(KEY_PLACE, gallery);
+                    bundle.putParcelable(KEY_PLACE, famousPlaces);
                     onRecyclerViewItemClickListener.onItemClicked(bundle);
                 }
             }
@@ -74,6 +74,6 @@ public class GalleryRecyclerAdapter extends RecyclerView.Adapter<GalleryImageVie
 
     @Override
     public int getItemCount() {
-        return galleryArrayList.size();
+        return famousPlaceArrayList.size();
     }
 }

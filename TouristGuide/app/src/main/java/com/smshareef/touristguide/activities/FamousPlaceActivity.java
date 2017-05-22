@@ -5,25 +5,25 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
 
 import com.smshareef.touristguide.R;
-import com.smshareef.touristguide.adapters.GalleryRecyclerAdapter;
-import com.smshareef.touristguide.manager.PlaceDataManager;
-import com.smshareef.touristguide.model.Place;
+import com.smshareef.touristguide.adapters.FamousPlaceRecyclerAdapter;
+import com.smshareef.touristguide.manager.FamousPlaceDataManager;
+import com.smshareef.touristguide.model.FamousPlace;
+import com.smshareef.touristguide.utils.FamousPlaceDataListener;
 import com.smshareef.touristguide.utils.OnRecyclerViewItemClickListener;
-import com.smshareef.touristguide.utils.PlaceDataListener;
 
 import java.util.ArrayList;
 
-import static com.smshareef.touristguide.utils.AppConstants.KEY_POSITION;
+import static com.smshareef.touristguide.utils.AppConstants.FAMOUS_PLACE;
 import static com.smshareef.touristguide.utils.AppConstants.RESOURCES_DIR;
 
-public class GalleryActivity extends AppCompatActivity implements OnRecyclerViewItemClickListener, PlaceDataListener {
+public class FamousPlaceActivity extends AppCompatActivity implements OnRecyclerViewItemClickListener, FamousPlaceDataListener {
 
     //----------------------------------------------------------------------------------------------
     //Views
@@ -36,12 +36,9 @@ public class GalleryActivity extends AppCompatActivity implements OnRecyclerView
     //Other fields
     //----------------------------------------------------------------------------------------------
 
-    private GalleryRecyclerAdapter galleryRecyclerAdapter;
-    private static final int GRID_COLUMN_COUNT = 2;
+    private FamousPlaceRecyclerAdapter famousPlaceRecyclerAdapter;
     private static final int REQUEST_CODE = 102;
     private String placeName;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,59 +51,58 @@ public class GalleryActivity extends AppCompatActivity implements OnRecyclerView
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(GalleryActivity.this, AddImageActivity.class);
+                Intent intent = new Intent(FamousPlaceActivity.this, AddFamousPlaceActivity.class);
                 intent.putExtra("place_name", placeName);
-                intent.putExtra("image_count", galleryRecyclerAdapter.getItemCount());
                 startActivityForResult(intent, REQUEST_CODE);
             }
         });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        try {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        galleryRecyclerAdapter = new GalleryRecyclerAdapter(this);
+        famousPlaceRecyclerAdapter = new FamousPlaceRecyclerAdapter(this);
 
         recyclerView.setHasFixedSize(true);
 
-        galleryRecyclerAdapter.setOnRecyclerViewItemClickListener(this);
-        recyclerView.setAdapter(galleryRecyclerAdapter);
+        famousPlaceRecyclerAdapter.setOnRecyclerViewItemClickListener(this);
+        recyclerView.setAdapter(famousPlaceRecyclerAdapter);
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, GRID_COLUMN_COUNT);
-        gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(gridLayoutManager);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
         placeName = getIntent().getStringExtra("Place_Name");
-        setTitle(placeName + "Gallery");
 
         loadData();
     }
 
     private void loadData() {
-        PlaceDataManager placeDataManager = new PlaceDataManager(this);
-        placeDataManager.setDir(RESOURCES_DIR + "/" + placeName + "/");
-        placeDataManager.fetchPlaceData();
-    }
-
-    @Override
-    public void onPlaceLoaded(ArrayList<Place> galleryArrayList) {
-        galleryRecyclerAdapter.setData(galleryArrayList);
-    }
-
-    @Override
-    public void onPlaceLoadingFailed() {
-
-    }
-
-    @Override
-    public void onPlaceLoadingCancelled() {
-
+        FamousPlaceDataManager placeDataManager = new FamousPlaceDataManager(this);
+        placeDataManager.setDir(RESOURCES_DIR + "/" + placeName + "/" + FAMOUS_PLACE + "/");
+        placeDataManager.fetchFamousPlaceData();
     }
 
     @Override
     public void onItemClicked(Bundle bundle) {
-        Intent intent = new Intent(GalleryActivity.this, GalleryFullScreenActivity.class);
-        intent.putExtra("position", bundle.getInt(KEY_POSITION));
-        intent.putExtra("dir", RESOURCES_DIR + "/" + placeName + "/");
-        GalleryActivity.this.startActivity(intent);
+        Toast.makeText(this, "Click on MAP icon to view location on Map", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onFamousPlaceLoaded(ArrayList<FamousPlace> placeArrayList) {
+        famousPlaceRecyclerAdapter.setData(placeArrayList);
+    }
+
+    @Override
+    public void onFamousPlaceLoadingFailed() {
+
+    }
+
+    @Override
+    public void onFamousPlaceLoadingCancelled() {
 
     }
 
@@ -117,14 +113,12 @@ public class GalleryActivity extends AppCompatActivity implements OnRecyclerView
             if(resultCode == Activity.RESULT_OK) {
                 Bundle b = data.getExtras();
                 if(b != null) {
-                    Place gallery = b.getParcelable("gallery");
-                    galleryRecyclerAdapter.addData(gallery);
+                    FamousPlace place = b.getParcelable("place");
+                    famousPlaceRecyclerAdapter.addData(place);
                 }
             } else if (resultCode == 0) {
                 Toast.makeText(this, "Request Cancelled", Toast.LENGTH_SHORT).show();
             }
         }
     }
-
-
 }

@@ -42,6 +42,7 @@ public class PlaceDetailsActivity extends AppCompatActivity {
     private Uri placeImage;
 
     private Button gallery;
+    private Button famousPlaces;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -119,6 +120,17 @@ public class PlaceDetailsActivity extends AppCompatActivity {
                 Intent intent = new Intent(PlaceDetailsActivity.this,GalleryActivity.class);
                 intent.putExtra("Place_Name", placeName);
                 PlaceDetailsActivity.this.startActivity(intent);
+            }
+        });
+
+        famousPlaces = (Button) findViewById(R.id.buttonFamousPlaces);
+
+        famousPlaces.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PlaceDetailsActivity.this, FamousPlaceActivity.class);
+                intent.putExtra("Place_Name", placeName);
+                startActivity(intent);
             }
         });
 

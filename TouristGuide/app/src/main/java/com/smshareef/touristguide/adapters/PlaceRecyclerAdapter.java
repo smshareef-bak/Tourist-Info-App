@@ -43,7 +43,6 @@ public class PlaceRecyclerAdapter extends RecyclerView.Adapter<PlaceDetailsViewH
     public void addData(Place place) {
         this.placeArrayList.add(place);
         notifyItemInserted(this.placeArrayList.size());
-        notifyItemChanged(this.placeArrayList.size());
     }
 
     @Override
