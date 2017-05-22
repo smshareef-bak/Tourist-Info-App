@@ -1,5 +1,6 @@
 package com.smshareef.touristguide.activities;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -8,9 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.smshareef.touristguide.R;
 import com.squareup.picasso.Picasso;
@@ -26,32 +27,36 @@ import java.io.IOException;
 import static com.smshareef.touristguide.utils.AppConstants.IMAGE_DESC;
 import static com.smshareef.touristguide.utils.AppConstants.RESOURCES_DIR;
 
-public class PlaceDetailsActivity extends AppCompatActivity implements View.OnClickListener{
+public class PlaceDetailsActivity extends AppCompatActivity {
 
-    ImageView mImageView;
-    TextView mTextView;
+    private ImageView mImageView;
+    private TextView mTextView;
     private static final String LOG_TAG = "PlaceDetailsActivity";
-    String line;
-    StringBuilder text;
-    FloatingActionButton fabAddDesc;
+    public static final int EDIT_TEXT = 102;
+    private String line;
+    private StringBuilder text;
+    private FloatingActionButton fabAddDesc;
+    private String edit = "To add the description please click on EDIT Floating Action Button";
 
+    private String placeName;
+    private Uri placeImage;
+
+    private Button gallery;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         fabAddDesc = (FloatingActionButton) findViewById(R.id.fabAddDesc);
-        fabAddDesc.setOnClickListener(this);
 
 
-        String placeName = getIntent().getStringExtra("Place_Name");
+        placeName = getIntent().getStringExtra("Place_Name");
         placeName = FilenameUtils.removeExtension(placeName);
         setTitle(placeName);
-        Uri placeImage = getIntent().getParcelableExtra("Place_Image");
+        placeImage = getIntent().getParcelableExtra("Place_Image");
         mImageView = (ImageView) findViewById(R.id.imageViewPlaceDetails);
         mTextView = (TextView) findViewById(R.id.textViewPlaceDetails);
         Picasso.with(this)
@@ -61,7 +66,7 @@ public class PlaceDetailsActivity extends AppCompatActivity implements View.OnCl
                 .error(R.mipmap.ic_launcher_round)
                 .into(mImageView);
 
-        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + RESOURCES_DIR + "/" + placeName + "/" + IMAGE_DESC;
+        final String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + RESOURCES_DIR + "/" + placeName + "/" + IMAGE_DESC;
 
         File file = new File(path);
         if (!file.exists()) {
@@ -71,7 +76,7 @@ public class PlaceDetailsActivity extends AppCompatActivity implements View.OnCl
             try {
                 File createFile = new File(f, IMAGE_DESC);
                 FileWriter writer = new FileWriter(createFile);
-                writer.append("Please Enter Description Here");
+                writer.append(edit);
                 writer.flush();
                 writer.close();
             } catch (IOException ioe) {
@@ -96,13 +101,28 @@ public class PlaceDetailsActivity extends AppCompatActivity implements View.OnCl
             Log.e("LOG_TAG","File read exception");
         }
 
+        fabAddDesc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PlaceDetailsActivity.this,EditTextActivity.class);
+                intent.putExtra("Place_Name", placeName);
+                PlaceDetailsActivity.this.startActivity(intent);
+                finish();
+            }
+        });
+
+        gallery = (Button) findViewById(R.id.buttonGallery);
+
+        gallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PlaceDetailsActivity.this,GalleryActivity.class);
+                intent.putExtra("Place_Name", placeName);
+                PlaceDetailsActivity.this.startActivity(intent);
+            }
+        });
+
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.fabAddDesc) {
-            Toast.makeText(this, "FAB Clicked", Toast.LENGTH_SHORT).show();
-        }
-    }
 
 }

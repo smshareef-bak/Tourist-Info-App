@@ -39,7 +39,26 @@
         <activity
             android:name=".activities.AddPlaceActivity"
             android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.EditTextActivity"
+            android:parentActivityName=".activities.PlaceDetailsActivity" />
+        <activity
+            android:name=".activities.GalleryActivity"
+            android:label="@string/title_activity_gallery"
+            android:parentActivityName=".activities.PlaceDetailsActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.smshareef.touristguide.activities.PlaceDetailsActivity" />
+        </activity>
+        <activity android:name=".activities.AddImageActivity"
+            android:parentActivityName=".activities.GalleryActivity"></activity>
+
+        <activity android:name=".activities.GalleryFullScreenActivity"
+            android:parentActivityName=".activities.GalleryActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
     </application>
 
 </manifest>

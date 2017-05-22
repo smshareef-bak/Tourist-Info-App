@@ -30,6 +30,8 @@ import java.util.ArrayList;
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static com.smshareef.touristguide.utils.AppConstants.KEY_PLACE;
+import static com.smshareef.touristguide.utils.AppConstants.PLACES_IMAGE_DIR;
+import static com.smshareef.touristguide.utils.AppConstants.RESOURCES_DIR;
 import static com.smshareef.touristguide.utils.PermissionUtils.hasPermission;
 
 
@@ -93,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements PlaceDataListener
 
     private void loadData() {
         PlaceDataManager placeDataManager = new PlaceDataManager(this);
+        placeDataManager.setDir(RESOURCES_DIR + "/" + PLACES_IMAGE_DIR);
         placeDataManager.fetchPlaceData();
     }
 

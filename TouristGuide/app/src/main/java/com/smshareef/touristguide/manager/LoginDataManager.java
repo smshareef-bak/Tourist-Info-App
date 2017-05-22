@@ -20,8 +20,8 @@ public class LoginDataManager {
     }
 
     public void getLoginData() {
-        String userID = "abc";//"user123@example.com";
-        String password = "abc";//"User@1234";
+        String userID = "1";//"user123@example.com";
+        String password = "1";//"User@1234";
 
         onLoginDataReadyListener.onLoginDataReady(userID,password);
     }

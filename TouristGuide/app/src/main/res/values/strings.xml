@@ -20,4 +20,8 @@
     <string name="add_place_bt_get_image">Select Image</string>
     <string name="add_place_bt_save">Save</string>
     <string name="add_place_desc">Place Name</string>
+    <string name="add_place_edit">Edit</string>
+    <string name="desc_save_button">Save</string>
+    <string name="title_activity_gallery">GalleryActivity</string>
+    <string name="add_gallery">Add Image to Gallery</string>
 </resources>

@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.smshareef.touristguide.activities.AddPlaceActivity"
-    app:theme="@style/AppTheme.NoActionBar">
+    tools:context="com.smshareef.touristguide.activities.AddImageActivity">
 
     <ImageView
-        android:id="@+id/addPlaceIv"
+        android:id="@+id/addGalleryIv"
         android:layout_width="0dp"
         android:layout_height="120dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -18,7 +17,7 @@
         app:srcCompat="@color/colorPrimary" />
 
     <TextView
-        android:id="@+id/addPlaceTv"
+        android:id="@+id/addGalleryTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -26,19 +25,19 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         android:elevation="1dp"
-        android:text="@string/add_place"
+        android:text="@string/add_gallery"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:textColor="@android:color/background_light"
         android:textSize="36sp"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/addPlaceSv"
+        app:layout_constraintBottom_toTopOf="@+id/addGallerySv"
         app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintLeft_toLeftOf="@+id/addPlaceIv"
-        app:layout_constraintRight_toRightOf="@+id/addPlaceIv"
-        app:layout_constraintTop_toTopOf="@+id/addPlaceIv" />
+        app:layout_constraintLeft_toLeftOf="@+id/addGalleryIv"
+        app:layout_constraintRight_toRightOf="@+id/addGalleryIv"
+        app:layout_constraintTop_toTopOf="@+id/addGalleryIv" />
 
     <ScrollView
-        android:id="@+id/addPlaceSv"
+        android:id="@+id/addGallerySv"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scrollbars="none"
@@ -46,37 +45,27 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/addPlaceIv"
+        app:layout_constraintTop_toBottomOf="@id/addGalleryIv"
         app:layout_constraintVertical_bias="0.0">
 
         <RelativeLayout
-            android:id="@+id/addPlaceRl"
+            android:id="@+id/addGalleryRl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hapticFeedbackEnabled="true"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/addPlaceEt"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:hint="@string/add_place_desc"
-                android:inputType="text" />
 
             <ImageView
-                android:id="@+id/addPlaceImagePreviewIv"
+                android:id="@+id/addGalleryImagePreviewIv"
                 android:layout_width="300dp"
                 android:layout_height="200dp"
-                android:layout_below="@+id/addPlaceEt"
                 android:layout_centerHorizontal="true"
                 app:srcCompat="@mipmap/ic_launcher" />
 
 
             <Button
-                android:id="@+id/addPlaceSelectImageBt"
+                android:id="@+id/addGallerySelectImageBt"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="@string/add_place_bt_get_image"
@@ -86,10 +75,10 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                android:layout_below="@id/addPlaceImagePreviewIv" />
+                android:layout_below="@id/addGalleryImagePreviewIv" />
 
             <Button
-                android:id="@+id/addPlaceSaveBt"
+                android:id="@+id/addGallerySaveBt"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="@string/add_place_bt_save"
@@ -98,8 +87,9 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="20dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp" />
 
         </RelativeLayout>
     </ScrollView>
+
 </android.support.constraint.ConstraintLayout>

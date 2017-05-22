@@ -7,6 +7,7 @@ import android.util.Log;
 import com.smshareef.touristguide.model.Place;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.util.ArrayList;
 
 /**
@@ -22,7 +23,7 @@ public class PlaceUtils {
      * @return list of all images inside directory
      */
 
-    public  static ArrayList<Place> getAllImagesFromDir(String dir) {
+    public static ArrayList<Place> getAllImagesFromDir(String dir) {
 
         ArrayList<Place> placeArrayList = new ArrayList<>();
         String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + dir + "/";
@@ -34,7 +35,15 @@ public class PlaceUtils {
             f.mkdirs();
             return placeArrayList;
         }
-        File[] files = directory.listFiles();
+        final File[] files = directory.listFiles(new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                if (name.endsWith(".jpg") || name.endsWith(".png") ) {
+                    return true;
+                }
+                return false;
+            }
+        });
         for (File file : files) {
             Place placeDetails = new Place();
             placeDetails.setPlaceName(file.getName());

@@ -16,11 +16,13 @@ import com.smshareef.touristguide.manager.OnLoginDataReadyListener;
 
 import static com.smshareef.touristguide.R.id.tv_login_welcome;
 
-public class LoginActivity extends AppCompatActivity implements OnLoginDataReadyListener {
+public class LoginActivity extends AppCompatActivity {
 
     private EditText mLoginUserIDEt;
     private EditText mLoginPasswordEt;
     private Button mForgotPasswordBt;
+
+    private String uid, pwd;
 
 
     @Override
@@ -37,12 +39,22 @@ public class LoginActivity extends AppCompatActivity implements OnLoginDataReady
         Button mLoginBt = (Button) findViewById(R.id.bt_login);
         mForgotPasswordBt = (Button) findViewById(R.id.bt_forgot_password);
 
+
+        OnLoginDataReadyListener onLoginDataReadyListener = new OnLoginDataReadyListener() {
+            @Override
+            public void onLoginDataReady(String userID, String password) {
+                uid = userID;
+                pwd = password;
+            }
+        };
+        final LoginDataManager loginDataManager = new LoginDataManager(onLoginDataReadyListener);
+        loginDataManager.getLoginData();
+
         mLoginBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String userID = mLoginUserIDEt.getText().toString();
                 String password = mLoginPasswordEt.getText().toString();
-                loadData();
                 if(userID.equals(uid)) {
                     if(password.equals(pwd)) {
                         Toast.makeText(LoginActivity.this,"Successfully Logged in...",Toast.LENGTH_SHORT).show();
@@ -64,21 +76,10 @@ public class LoginActivity extends AppCompatActivity implements OnLoginDataReady
         mForgotPasswordBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadData();
                 Toast.makeText(LoginActivity.this,"User ID is " + uid + " and Password is " + pwd,Toast.LENGTH_LONG).show();
             }
         });
     }
 
-    String uid, pwd;
-    private void loadData() {
-        LoginDataManager loginDataManager = new LoginDataManager(this);
-        loginDataManager.getLoginData();
-    }
 
-    @Override
-    public void onLoginDataReady(String userID, String password) {
-        uid = userID;
-        pwd = password;
-    }
 }

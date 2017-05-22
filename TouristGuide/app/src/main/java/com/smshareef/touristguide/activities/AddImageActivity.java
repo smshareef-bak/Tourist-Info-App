@@ -11,7 +11,6 @@ import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,37 +23,37 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import static com.smshareef.touristguide.utils.AppConstants.PLACES_IMAGE_DIR;
 import static com.smshareef.touristguide.utils.AppConstants.RESOURCES_DIR;
 
+public class AddImageActivity extends AppCompatActivity {
 
-public class AddPlaceActivity extends AppCompatActivity {
+    TextView mAddGalleryTv;
+    ImageView mAddGalleryIv;
+    Button mAddGallerySelectImageBt;
+    Button mAddGallerySaveBt;
 
-    TextView mAddPlaceTv;
-    EditText mAddPlaceEt;
-    ImageView mAddPlaceIv;
-    Button mAddPlaceSelectImageBt;
-    Button mAddPlaceSaveBt;
+    static int num = 0;
 
     private static final int SELECT_PICTURE = 100;
+
+    String placeName;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_place);
+        setContentView(R.layout.activity_add_image);
 
-        mAddPlaceTv = (TextView) findViewById(R.id.addPlaceTv);
+        mAddGalleryTv = (TextView) findViewById(R.id.addGalleryTv);
         Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/NEOTERICc - Regular.ttf");
-        mAddPlaceTv.setTypeface(typeface);
+        mAddGalleryTv.setTypeface(typeface);
 
-        mAddPlaceEt = (EditText) findViewById(R.id.addPlaceEt);
-        mAddPlaceIv = (ImageView) findViewById(R.id.addPlaceImagePreviewIv);
-        mAddPlaceSelectImageBt = (Button) findViewById(R.id.addPlaceSelectImageBt);
-        mAddPlaceSaveBt = (Button) findViewById(R.id.addPlaceSaveBt);
+        mAddGalleryIv = (ImageView) findViewById(R.id.addGalleryImagePreviewIv);
+        mAddGallerySelectImageBt = (Button) findViewById(R.id.addGallerySelectImageBt);
+        mAddGallerySaveBt = (Button) findViewById(R.id.addGallerySaveBt);
 
 
-        mAddPlaceSelectImageBt.setOnClickListener(new View.OnClickListener() {
+        mAddGallerySelectImageBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
@@ -64,18 +63,22 @@ public class AddPlaceActivity extends AppCompatActivity {
             }
         });
 
-        mAddPlaceSaveBt.setOnClickListener(new View.OnClickListener() {
+        placeName = getIntent().getStringExtra("place_name");
+        num = getIntent().getIntExtra("image_count", 0);
+
+        mAddGallerySaveBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bitmap bitmap = ((BitmapDrawable)mAddPlaceIv.getDrawable()).getBitmap();
-                String fileName= mAddPlaceEt.getText().toString();
+                Bitmap bitmap = ((BitmapDrawable)mAddGalleryIv.getDrawable()).getBitmap();
+                num += 1 ;
+                String fileName= "Image" + num;
                 Uri filePath = saveImageFile(bitmap, fileName);
-                Place place = new Place(fileName, filePath);
+                Place gallery = new Place(fileName, filePath);
                 Intent intent = new Intent();
-                intent.putExtra("place", place);
+                intent.putExtra("gallery", gallery);
                 setResult(Activity.RESULT_OK, intent);
                 finish();
-                AddPlaceActivity.super.onBackPressed();
+                AddImageActivity.super.onBackPressed();
             }
         });
 
@@ -88,7 +91,7 @@ public class AddPlaceActivity extends AppCompatActivity {
                 Uri selectedImageUri = data.getData();
                 if (null != selectedImageUri) {
                     // Set the image in ImageView
-                    mAddPlaceIv.setImageURI(selectedImageUri);
+                    mAddGalleryIv.setImageURI(selectedImageUri);
                 }
             }
         }
@@ -99,7 +102,7 @@ public class AddPlaceActivity extends AppCompatActivity {
         fileName = fileName + ".jpg";
         File file = new File(filePath, fileName);
         if (file.exists ()) {
-            Toast.makeText(this, "Place already present", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Image already present", Toast.LENGTH_SHORT).show();
             super.onBackPressed();
             return Uri.fromFile(file);
         }
@@ -119,8 +122,6 @@ public class AddPlaceActivity extends AppCompatActivity {
     private String getPathname() {
 
         return Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + RESOURCES_DIR +
-                                        "/" +PLACES_IMAGE_DIR;
+                "/" + placeName;
     }
-
-
 }

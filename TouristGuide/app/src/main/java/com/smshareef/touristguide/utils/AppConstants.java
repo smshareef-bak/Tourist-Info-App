@@ -11,4 +11,6 @@ public class AppConstants {
     public static final String KEY_POSITION = "position";
     public static final String KEY_PLACE = "place";
     public static final String IMAGE_DESC = "desc";
+    public static final String KEY_IMAGE_POS = "impos";
+    public static final String KEY_IMAGE = "image";
 }
