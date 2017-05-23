@@ -23,8 +23,8 @@ public class FamousPlaceUtils {
     private static final String LOG_TAG = "FamousPlaceUtils";
 
     /**
-     * @param dir dir or dir path inside externalStorage
-     * @return list of all images inside directory
+     * @param dir directory path inside externalStorage
+     * @return list of all images and text files inside directory
      */
 
     public static ArrayList<FamousPlace> getAllImagesFromDir(String dir) {
@@ -65,6 +65,8 @@ public class FamousPlaceUtils {
                 return false;
             }
         });
+
+        //To get respective description files for images/places
 
         for(int i=0;i<placeArrayList.size();i++) {
             for (File file : textFiles) {

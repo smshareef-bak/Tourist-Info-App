@@ -11,6 +11,10 @@ import com.squareup.picasso.Picasso;
 
 /**
  * Created by smsha on 22-05-2017.
+ *
+ * ViewHolder for recycler view to display images in Gallery
+ *
+ * @author smshareef
  */
 
 public class GalleryImageViewHolder extends RecyclerView.ViewHolder{

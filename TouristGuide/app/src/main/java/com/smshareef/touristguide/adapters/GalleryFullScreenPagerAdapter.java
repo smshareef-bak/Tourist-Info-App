@@ -15,7 +15,11 @@ import com.smshareef.touristguide.model.Place;
 import java.util.ArrayList;
 
 /**
- * Created by smsha on 22-05-2017.
+ * Created by smsha on 22-05-2017
+ *
+ * Adapter to show images in Pager
+ *
+ * @author smsha
  */
 
 public class GalleryFullScreenPagerAdapter extends PagerAdapter {

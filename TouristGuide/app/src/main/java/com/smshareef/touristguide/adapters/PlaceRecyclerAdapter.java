@@ -18,6 +18,10 @@ import static com.smshareef.touristguide.utils.AppConstants.KEY_POSITION;
 
 /**
  * Created by smsha on 17-05-2017.
+ *
+ * Adapter for displaying all the cities in recycler view
+ *
+ * @author smsha
  */
 
 public class PlaceRecyclerAdapter extends RecyclerView.Adapter<PlaceDetailsViewHolder> {

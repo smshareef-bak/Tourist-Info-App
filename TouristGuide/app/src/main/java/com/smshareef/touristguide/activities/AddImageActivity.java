@@ -8,7 +8,11 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -27,6 +31,8 @@ import static com.smshareef.touristguide.utils.AppConstants.RESOURCES_DIR;
 
 public class AddImageActivity extends AppCompatActivity {
 
+    //Declaration of variables
+
     TextView mAddGalleryTv;
     ImageView mAddGalleryIv;
     Button mAddGallerySelectImageBt;
@@ -38,6 +44,7 @@ public class AddImageActivity extends AppCompatActivity {
 
     String placeName;
 
+    //onCreate() is called when an Activity starts
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +59,7 @@ public class AddImageActivity extends AppCompatActivity {
         mAddGallerySelectImageBt = (Button) findViewById(R.id.addGallerySelectImageBt);
         mAddGallerySaveBt = (Button) findViewById(R.id.addGallerySaveBt);
 
-
+        //Select the image
         mAddGallerySelectImageBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,6 +72,8 @@ public class AddImageActivity extends AppCompatActivity {
 
         placeName = getIntent().getStringExtra("place_name");
         num = getIntent().getIntExtra("image_count", 0);
+
+        //Save the image when save button is clicked
 
         mAddGallerySaveBt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +93,8 @@ public class AddImageActivity extends AppCompatActivity {
 
     }
 
+    //Display the selected image in an ImageView
+
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             if (requestCode == SELECT_PICTURE) {
@@ -96,6 +107,8 @@ public class AddImageActivity extends AppCompatActivity {
             }
         }
     }
+
+    //Save image to a file
 
     public Uri saveImageFile(Bitmap bitmap, String fileName) {
         String filePath = getPathname();
@@ -119,9 +132,32 @@ public class AddImageActivity extends AppCompatActivity {
         return Uri.fromFile(file);
     }
 
+
     private String getPathname() {
 
         return Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + RESOURCES_DIR +
                 "/" + placeName;
+    }
+
+    //Add menu to activity
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.logout_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.logout_button) {
+            Intent intent = new Intent(AddImageActivity.this,LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                    | Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

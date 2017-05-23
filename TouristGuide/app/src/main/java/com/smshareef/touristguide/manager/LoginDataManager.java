@@ -5,9 +5,9 @@ package com.smshareef.touristguide.manager;
  *
  * DataManager  is generating dummy data. Actual data can be retrieved from
  * Server / Firebase / Database etc.
- * <p>
- * OnDataReadyListener is used to simulate loading of dummy data.
  *
+ * OnDataReadyListener is used to simulate loading of dummy data.
+ * 
  * @author smshareef
  */
 

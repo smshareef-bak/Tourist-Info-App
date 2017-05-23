@@ -15,6 +15,10 @@ import org.apache.commons.io.FilenameUtils;
 
 /**
  * Created by smsha on 22-05-2017.
+ *
+ * ViewHolder for recycler view to display famousPlaces
+ *
+ * @author smshareef
  */
 
  public class FamousPlaceViewHolder extends RecyclerView.ViewHolder {

@@ -8,6 +8,8 @@ import android.view.View;
 
 /**
  * Created by smsha on 22-05-2017.
+ *
+ * Fragment to show Gallery images in fullscreen mode
  */
 
 public class ImmersiveModeFragment extends Fragment {

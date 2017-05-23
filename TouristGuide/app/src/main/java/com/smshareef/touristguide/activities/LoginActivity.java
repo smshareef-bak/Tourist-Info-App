@@ -55,10 +55,14 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String userID = mLoginUserIDEt.getText().toString();
                 String password = mLoginPasswordEt.getText().toString();
+
+                //Check credentials
+
                 if(userID.equals(uid)) {
                     if(password.equals(pwd)) {
                         Toast.makeText(LoginActivity.this,"Successfully Logged in...",Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                        intent.putExtra("userId", uid); //user information is sent to other activities in case needed
                         LoginActivity.this.startActivity(intent);
                     } else if(password.equals("")){
                         Toast.makeText(LoginActivity.this,"Please enter password",Toast.LENGTH_LONG).show();
@@ -72,6 +76,8 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+        //Show username and Password when a button is pressed
 
         mForgotPasswordBt.setOnClickListener(new View.OnClickListener() {
             @Override

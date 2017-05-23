@@ -18,6 +18,10 @@ import static com.smshareef.touristguide.utils.AppConstants.KEY_POSITION;
 
 /**
  * Created by smsha on 22-05-2017.
+ *
+ * Adapter for displaying all the famousPlaces in recycler view
+ *
+ * @author smsha
  */
 
 public class FamousPlaceRecyclerAdapter extends RecyclerView.Adapter<FamousPlaceViewHolder> {

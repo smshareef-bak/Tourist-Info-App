@@ -10,6 +10,10 @@ import java.util.ArrayList;
 
 /**
  * Created by smsha on 22-05-2017.
+ *
+ * DataManager loads all the data available in given directory into ArrayList
+ *
+ * @author smsha
  */
 
 public class FamousPlaceDataManager extends AsyncTask<Void, Void, ArrayList<FamousPlace>> {

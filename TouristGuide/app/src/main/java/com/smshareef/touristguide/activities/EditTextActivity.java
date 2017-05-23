@@ -25,6 +25,8 @@ import static com.smshareef.touristguide.utils.AppConstants.RESOURCES_DIR;
 
 public class EditTextActivity extends AppCompatActivity {
 
+    //Declaration of variables
+
     private TextView mEditDescEt;
     private String placeName;
 
@@ -32,6 +34,8 @@ public class EditTextActivity extends AppCompatActivity {
     private String line;
 
     private String path;
+
+    //onCreate() is called when the activity is started
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +46,8 @@ public class EditTextActivity extends AppCompatActivity {
         placeName = FilenameUtils.removeExtension(placeName);
 
         mEditDescEt = (TextView) findViewById(R.id.editDescEt);
+
+        //Open description file in EditText
 
         path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + RESOURCES_DIR + "/" + placeName + "/" + IMAGE_DESC;
 
@@ -63,10 +69,9 @@ public class EditTextActivity extends AppCompatActivity {
         {
             Log.e("LOG_TAG","File read exception");
         }
-
-
-
     }
+
+    //Add menu to activity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -74,6 +79,8 @@ public class EditTextActivity extends AppCompatActivity {
         inflater.inflate(R.menu.add_desc_save_menu, menu);
         return true;
     }
+
+    //Save the edited text to the description file
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

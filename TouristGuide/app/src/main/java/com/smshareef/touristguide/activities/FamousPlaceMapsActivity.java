@@ -1,10 +1,15 @@
 package com.smshareef.touristguide.activities;
 
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.IntentCompat;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -53,12 +58,12 @@ public class FamousPlaceMapsActivity extends FragmentActivity implements OnMapRe
         String location = FilenameUtils.removeExtension(getIntent().getStringExtra("famous_place_name"));
         Toast.makeText(this, ""+location, Toast.LENGTH_SHORT).show();
         if(location!=null && !location.equals("")) {
-            new GeocoderTask().execute(location);
+            new ShowOnMap().execute(location);
         }
     }
 
     // An AsyncTask class for accessing the GeoCoding Web Service
-    private class GeocoderTask extends AsyncTask<String, Void, List<Address>> {
+    private class ShowOnMap extends AsyncTask<String, Void, List<Address>> {
 
         @Override
         protected List<Address> doInBackground(String... locationName) {
@@ -110,6 +115,26 @@ public class FamousPlaceMapsActivity extends FragmentActivity implements OnMapRe
 
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.logout_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.logout_button) {
+            Intent intent = new Intent(FamousPlaceMapsActivity.this,LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                    | Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

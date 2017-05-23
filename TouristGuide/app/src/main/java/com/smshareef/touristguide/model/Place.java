@@ -6,6 +6,8 @@ import android.os.Parcelable;
 
 /**
  * Created by smsha on 12-05-2017.
+ *
+ * DataModel for ArrayList used to show Places/Images in RecyclerView
  */
 
 public class Place implements Parcelable {

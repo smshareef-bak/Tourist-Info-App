@@ -19,7 +19,7 @@ public class PlaceUtils {
     private static final String LOG_TAG = "PlaceUtils";
 
     /**
-     * @param dir dir or dir path inside externalStorage
+     * @param dir directory path inside externalStorage
      * @return list of all images inside directory
      */
 

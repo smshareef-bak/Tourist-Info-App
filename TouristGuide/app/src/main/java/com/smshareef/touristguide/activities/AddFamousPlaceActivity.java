@@ -8,7 +8,11 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,6 +34,8 @@ import static com.smshareef.touristguide.utils.AppConstants.RESOURCES_DIR;
 
 public class AddFamousPlaceActivity extends AppCompatActivity {
 
+    //Declaration of variables
+
     TextView mAddPlaceTv;
     EditText mAddPlaceEt;
     EditText mAddPlaceDescEt;
@@ -42,6 +48,7 @@ public class AddFamousPlaceActivity extends AppCompatActivity {
     String placeName;
     String path;
 
+    //onCreate() is called when the activity first starts
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +67,8 @@ public class AddFamousPlaceActivity extends AppCompatActivity {
 
         placeName = getIntent().getStringExtra("place_name");
 
+        //Code to select image when a button is pressed
+
         mAddPlaceSelectImageBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,6 +78,8 @@ public class AddFamousPlaceActivity extends AppCompatActivity {
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
             }
         });
+
+        //Save the place when required details are available
 
         mAddPlaceSaveBt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +106,8 @@ public class AddFamousPlaceActivity extends AppCompatActivity {
 
     }
 
+    //Set the image in the ImageView
+
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             if (requestCode == SELECT_PICTURE) {
@@ -107,6 +120,8 @@ public class AddFamousPlaceActivity extends AppCompatActivity {
             }
         }
     }
+
+    //Save the description in .txt file
 
     private void saveFileDesc(String fileDesc, String fileName) {
         path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + RESOURCES_DIR + "/" + placeName +
@@ -125,6 +140,9 @@ public class AddFamousPlaceActivity extends AppCompatActivity {
         }
 
     }
+
+    //Save image file
+
     private Uri saveImageFile(Bitmap bitmap, String fileName) {
         path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + RESOURCES_DIR + "/" + placeName +
                                                         "/" + FAMOUS_PLACE + "/" ;
@@ -148,5 +166,26 @@ public class AddFamousPlaceActivity extends AppCompatActivity {
         return Uri.fromFile(file);
     }
 
+    //Add the menu to activity
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.logout_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.logout_button) {
+            Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                    | Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 }

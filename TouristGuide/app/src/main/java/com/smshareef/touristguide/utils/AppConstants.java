@@ -2,6 +2,10 @@ package com.smshareef.touristguide.utils;
 
 /**
  * Created by smsha on 17-05-2017.
+ *
+ * Constants used throughout the app
+ *
+ * @author smsha
  */
 
 public class AppConstants {

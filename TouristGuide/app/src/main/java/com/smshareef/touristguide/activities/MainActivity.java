@@ -11,10 +11,14 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -75,6 +79,8 @@ public class MainActivity extends AppCompatActivity implements PlaceDataListener
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(this);
 
+        //To set adapter to RecyclerView
+
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         placeRecyclerAdapter = new PlaceRecyclerAdapter(this);
 
@@ -92,6 +98,8 @@ public class MainActivity extends AppCompatActivity implements PlaceDataListener
         }
 
     }
+
+    //Instantiate ArrayList when called
 
     private void loadData() {
         PlaceDataManager placeDataManager = new PlaceDataManager(this);
@@ -219,11 +227,11 @@ public class MainActivity extends AppCompatActivity implements PlaceDataListener
     }
 
 
-
+    //To exit the application when back button is pressed twice
 
     @Override
     public void onBackPressed() {
-        if (doubleBackToExitPressedOnce) {  //If back button is already pressed before 2 seconds, back button functionality is implemented.
+        if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
             return;
         }
@@ -238,6 +246,8 @@ public class MainActivity extends AppCompatActivity implements PlaceDataListener
             }
         }, 2000);
     }
+
+    // Adds the ArrayList to adapter ArrayList
 
     @Override
     public void onPlaceLoaded(ArrayList<Place> placeArrayList) {
@@ -254,6 +264,8 @@ public class MainActivity extends AppCompatActivity implements PlaceDataListener
 
     }
 
+    //To open activity to add a new place
+
     @Override
     public void onClick( View v) {
         if (v.getId() == R.id.fab) {
@@ -262,6 +274,7 @@ public class MainActivity extends AppCompatActivity implements PlaceDataListener
         }
     }
 
+    //Display the details of selected place
 
     @Override
     public void onItemClicked(Bundle bundle) {
@@ -274,6 +287,8 @@ public class MainActivity extends AppCompatActivity implements PlaceDataListener
         intent.putExtra("Place_Image", placeImage);
         MainActivity.this.startActivity(intent);
     }
+
+    //Add place to ArrayList when required object is available from called activity
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -289,6 +304,30 @@ public class MainActivity extends AppCompatActivity implements PlaceDataListener
                 Toast.makeText(this, "Request Cancelled", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    //Add menu to Activity
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.logout_menu, menu);
+        return true;
+    }
+
+    //Goto login activity when button is clicked
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.logout_button) {
+            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                    | Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

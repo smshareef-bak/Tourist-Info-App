@@ -15,6 +15,10 @@ import org.apache.commons.io.FilenameUtils;
 
 /**
  * Created by smsha on 17-05-2017.
+ *
+ * ViewHolder for recycler view to display places
+ *
+ * @author smshareef
  */
 
 public class PlaceDetailsViewHolder extends RecyclerView.ViewHolder{

@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+
 import com.smshareef.touristguide.R;
 import com.smshareef.touristguide.adapters.GalleryFullScreenPagerAdapter;
 import com.smshareef.touristguide.model.Place;
@@ -43,10 +44,14 @@ public class GalleryFullScreenActivity extends FragmentActivity{
         images = PlaceUtils.getAllImagesFromDir(dir);
 
         viewPager = (ViewPager) findViewById(R.id.pager);
-
         pagerAdapter = new GalleryFullScreenPagerAdapter(GalleryFullScreenActivity.this, images);
-
         viewPager.setAdapter(pagerAdapter);
+
+        //Start from selected image
+
+        viewPager.setCurrentItem(getIntent().getIntExtra("position", 0));
+
+
 
     }
 

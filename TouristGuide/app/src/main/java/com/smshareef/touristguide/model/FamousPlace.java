@@ -6,6 +6,10 @@ import android.os.Parcelable;
 
 /**
  * Created by smsha on 22-05-2017.
+ *
+ * DataModel for ArrayList used to show famousPlaces in RecyclerView
+ *
+ * @author smsha
  */
 
 public class FamousPlace implements Parcelable {

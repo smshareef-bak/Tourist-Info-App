@@ -5,9 +5,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -53,6 +57,7 @@ public class PlaceDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         fabAddDesc = (FloatingActionButton) findViewById(R.id.fabAddDesc);
 
+        //To show the details of a place
 
         placeName = getIntent().getStringExtra("Place_Name");
         placeName = FilenameUtils.removeExtension(placeName);
@@ -68,6 +73,10 @@ public class PlaceDetailsActivity extends AppCompatActivity {
                 .into(mImageView);
 
         final String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + RESOURCES_DIR + "/" + placeName + "/" + IMAGE_DESC;
+
+        //To read description file and display in a TextView
+
+        //If Folder/File is absent, create it
 
         File file = new File(path);
         if (!file.exists()) {
@@ -87,6 +96,8 @@ public class PlaceDetailsActivity extends AppCompatActivity {
 
         text = new StringBuilder();
 
+        //Read file and show in TextView
+
         try
         {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
@@ -102,6 +113,8 @@ public class PlaceDetailsActivity extends AppCompatActivity {
             Log.e("LOG_TAG","File read exception");
         }
 
+        //Show activity to edit description when a fab is clicked
+
         fabAddDesc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,6 +127,8 @@ public class PlaceDetailsActivity extends AppCompatActivity {
 
         gallery = (Button) findViewById(R.id.buttonGallery);
 
+        //Show the images in gallery
+
         gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,6 +137,8 @@ public class PlaceDetailsActivity extends AppCompatActivity {
                 PlaceDetailsActivity.this.startActivity(intent);
             }
         });
+
+        //Show the famous places in selected place
 
         famousPlaces = (Button) findViewById(R.id.buttonFamousPlaces);
 
@@ -134,6 +151,30 @@ public class PlaceDetailsActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    //Add menu to activity
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.logout_menu, menu);
+        return true;
+    }
+
+    //To close all activities and goto Login activity when a button is pressed
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.logout_button) {
+            Intent intent = new Intent(PlaceDetailsActivity.this,LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                    | Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 
