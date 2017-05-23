@@ -69,13 +69,18 @@ public class AddPlaceActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Bitmap bitmap = ((BitmapDrawable)mAddPlaceIv.getDrawable()).getBitmap();
                 String fileName= mAddPlaceEt.getText().toString();
-                Uri filePath = saveImageFile(bitmap, fileName);
-                Place place = new Place(fileName, filePath);
-                Intent intent = new Intent();
-                intent.putExtra("place", place);
-                setResult(Activity.RESULT_OK, intent);
-                finish();
-                AddPlaceActivity.super.onBackPressed();
+                if(fileName.isEmpty()|| fileName.trim().length() <= 0){
+                    Toast.makeText(AddPlaceActivity.this, "Place name cannot be empty", Toast.LENGTH_SHORT).show();
+                    AddPlaceActivity.super.onBackPressed();
+                } else {
+                    Uri filePath = saveImageFile(bitmap, fileName);
+                    Place place = new Place(fileName, filePath);
+                    Intent intent = new Intent();
+                    intent.putExtra("place", place);
+                    setResult(Activity.RESULT_OK, intent);
+                    finish();
+                    AddPlaceActivity.super.onBackPressed();
+                }
             }
         });
 

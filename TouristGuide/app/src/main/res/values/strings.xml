@@ -27,4 +27,5 @@
     <string name="add_gallery">Add Image to Gallery</string>
     <string name="title_activity_famous_places">FamousPlacesActivity</string>
     <string name="add_famous_place">Add a new famous place</string>
+    <string name="title_activity_famous_place_maps">Map</string>
 </resources>

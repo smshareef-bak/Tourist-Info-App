@@ -17,19 +17,23 @@ import org.apache.commons.io.FilenameUtils;
  * Created by smsha on 22-05-2017.
  */
 
-public class FamousPlaceViewHolder extends RecyclerView.ViewHolder {
+ public class FamousPlaceViewHolder extends RecyclerView.ViewHolder {
 
-    private ImageView famousPlaceImage;
-    private TextView famousPlaceName;
-    private TextView famousPlaceDescription;
+    private ImageView mFamousPlaceImage;
+    private TextView mFamousPlaceName;
+    private TextView mFamousPlaceDescription;
+    public ImageView mImageView;
     private Context context;
 
     public FamousPlaceViewHolder(View itemView) {
         super(itemView);
         this.context = itemView.getContext();
-        this.famousPlaceImage = (ImageView) itemView.findViewById(R.id.famousPlacesIv);
-        this.famousPlaceName = (TextView) itemView.findViewById(R.id.famousPlacesNameTv);
-        this.famousPlaceDescription = (TextView) itemView.findViewById(R.id.famousPlacesDescTv);
+        this.mFamousPlaceImage = (ImageView) itemView.findViewById(R.id.famousPlacesIv);
+        this.mFamousPlaceName = (TextView) itemView.findViewById(R.id.famousPlacesNameTv);
+        this.mFamousPlaceDescription = (TextView) itemView.findViewById(R.id.famousPlacesDescTv);
+        this.mImageView = (ImageView) itemView.findViewById(R.id.imageButton);
+
+
     }
 
     void bindData(FamousPlace famousPlace) {
@@ -39,12 +43,14 @@ public class FamousPlaceViewHolder extends RecyclerView.ViewHolder {
         String mFamousPlacesName = famousPlace.getFamousPlaceName();
         String mFamousPlacesDescription = famousPlace.getFamousPlaceDescription();
 
-        famousPlaceName.setText(FilenameUtils.removeExtension(mFamousPlacesName));
-        famousPlaceDescription.setText(mFamousPlacesDescription);
+        mFamousPlaceName.setText(FilenameUtils.removeExtension(mFamousPlacesName));
+        mFamousPlaceDescription.setText(mFamousPlacesDescription);
         Picasso.with(context)
                 .load(famousPlace.getFamousPlaceImage())
                 .placeholder(R.mipmap.ic_launcher_round)// placeholder before loading images
                 .error(R.mipmap.ic_launcher_round) // Image to be displayed in case of error
-                .into(famousPlaceImage);
+                .into(mFamousPlaceImage);
+
+        mImageView.setImageResource(famousPlace.getMapImageId());
     }
 }

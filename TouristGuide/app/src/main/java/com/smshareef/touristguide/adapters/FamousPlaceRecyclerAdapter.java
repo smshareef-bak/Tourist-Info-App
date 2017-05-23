@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.smshareef.touristguide.R;
 import com.smshareef.touristguide.model.FamousPlace;
-import com.smshareef.touristguide.utils.OnRecyclerViewItemClickListener;
+import com.smshareef.touristguide.utils.OnRecyclerViewFamousPlaceClickListener;
 
 import java.util.ArrayList;
 
@@ -24,14 +24,14 @@ public class FamousPlaceRecyclerAdapter extends RecyclerView.Adapter<FamousPlace
 
     private LayoutInflater inflater;
     private ArrayList<FamousPlace> famousPlaceArrayList;
-    private OnRecyclerViewItemClickListener onRecyclerViewItemClickListener;
+    private OnRecyclerViewFamousPlaceClickListener onRecyclerViewItemClickListener;
 
     public FamousPlaceRecyclerAdapter(Context context) {
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.famousPlaceArrayList = new ArrayList<>();
     }
 
-    public void setOnRecyclerViewItemClickListener(OnRecyclerViewItemClickListener onRecyclerViewItemClickListener) {
+    public void setOnRecyclerViewItemClickListener(OnRecyclerViewFamousPlaceClickListener onRecyclerViewItemClickListener) {
         this.onRecyclerViewItemClickListener = onRecyclerViewItemClickListener;
     }
 
@@ -65,11 +65,20 @@ public class FamousPlaceRecyclerAdapter extends RecyclerView.Adapter<FamousPlace
                     Bundle bundle = new Bundle();
                     bundle.putInt(KEY_POSITION, holder.getAdapterPosition());
                     bundle.putParcelable(KEY_PLACE, famousPlaces);
-                    onRecyclerViewItemClickListener.onItemClicked(bundle);
+                    onRecyclerViewItemClickListener.onItemClicked(bundle, v);
                 }
             }
         });
 
+        holder.mImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putInt(KEY_POSITION, holder.getAdapterPosition());
+                bundle.putParcelable(KEY_PLACE, famousPlaces);
+                onRecyclerViewItemClickListener.onItemClicked(bundle, v);
+            }
+        });
     }
 
     @Override

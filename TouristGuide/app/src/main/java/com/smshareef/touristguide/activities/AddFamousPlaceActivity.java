@@ -60,7 +60,6 @@ public class AddFamousPlaceActivity extends AppCompatActivity {
 
         placeName = getIntent().getStringExtra("place_name");
 
-
         mAddPlaceSelectImageBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,15 +75,21 @@ public class AddFamousPlaceActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Bitmap bitmap = ((BitmapDrawable)mAddPlaceIv.getDrawable()).getBitmap();
                 String fileName = mAddPlaceEt.getText().toString();
-                String fileDesc = mAddPlaceDescEt.getText().toString();
-                Uri filePath = saveImageFile(bitmap, fileName);
-                saveFileDesc(fileDesc, fileName);
-                FamousPlace place = new FamousPlace(fileName,fileDesc,filePath);
-                Intent intent = new Intent();
-                intent.putExtra("place", place);
-                setResult(Activity.RESULT_OK, intent);
-                finish();
-                AddFamousPlaceActivity.super.onBackPressed();
+                if(fileName.isEmpty() || fileName.trim().length() <= 0){
+                    Toast.makeText(AddFamousPlaceActivity.this, "Place name cannot be empty", Toast.LENGTH_SHORT).show();
+                    AddFamousPlaceActivity.super.onBackPressed();
+                } else {
+                    String fileDesc = mAddPlaceDescEt.getText().toString();
+                    Uri filePath = saveImageFile(bitmap, fileName);
+                    saveFileDesc(fileDesc, fileName);
+                    int mapImageId = android.R.drawable.ic_dialog_map;
+                    FamousPlace place = new FamousPlace(fileName, fileDesc, filePath, mapImageId);
+                    Intent intent = new Intent();
+                    intent.putExtra("place", place);
+                    setResult(Activity.RESULT_OK, intent);
+                    finish();
+                    AddFamousPlaceActivity.super.onBackPressed();
+                }
             }
         });
 

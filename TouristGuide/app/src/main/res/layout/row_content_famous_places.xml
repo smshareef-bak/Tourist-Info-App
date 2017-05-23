@@ -42,19 +42,16 @@
             android:layout_marginStart="5dp"
             android:layout_marginLeft="5dp"/>
 
-        <ImageButton
+        <ImageView
             android:id="@+id/imageButton"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@id/famousPlacesNameTv"
             android:layout_toEndOf="@id/famousPlacesNameTv"
-            android:background="@color/colorAccent"
             android:scaleType="fitXY"
-            card_view:srcCompat="@android:drawable/ic_dialog_map"
             android:layout_marginStart="5dp"
-            android:layout_marginLeft="5dp"
-            android:elevation="5dp"/>
+            android:layout_marginLeft="5dp" />
 
     </RelativeLayout>
 

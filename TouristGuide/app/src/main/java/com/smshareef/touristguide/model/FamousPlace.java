@@ -12,21 +12,24 @@ public class FamousPlace implements Parcelable {
     private String famousPlaceName;
     private String famousPlaceDescription;
     private Uri famousPlaceImage;
+    private int mapImageId;
 
     public FamousPlace() {
 
     }
 
-    public FamousPlace(String famousPlaceName, String famousPlaceDescription, Uri famousPlaceImage) {
+    public FamousPlace(String famousPlaceName, String famousPlaceDescription, Uri famousPlaceImage, int mapImageId) {
         this.famousPlaceName = famousPlaceName;
         this.famousPlaceDescription = famousPlaceDescription;
         this.famousPlaceImage = famousPlaceImage;
+        this.mapImageId = mapImageId;
     }
 
     protected FamousPlace (Parcel in) {
         famousPlaceName = in.readString();
         famousPlaceDescription = in.readString();
         famousPlaceImage = in.readParcelable(Uri.class.getClassLoader());
+        mapImageId = in.readInt();
     }
 
     @Override
@@ -34,6 +37,7 @@ public class FamousPlace implements Parcelable {
         dest.writeString(famousPlaceName);
         dest.writeString(famousPlaceDescription);
         dest.writeParcelable(famousPlaceImage, flags);
+        dest.writeInt(mapImageId);
     }
 
     @Override
@@ -75,6 +79,14 @@ public class FamousPlace implements Parcelable {
 
     public void setFamousPlaceDescription(String famousPlaceDescription) {
         this.famousPlaceDescription = famousPlaceDescription;
+    }
+
+    public int getMapImageId() {
+        return mapImageId;
+    }
+
+    public void setMapImageId(int mapImageId) {
+        this.mapImageId = mapImageId;
     }
 
     @Override

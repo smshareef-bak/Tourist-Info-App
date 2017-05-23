@@ -52,6 +52,7 @@ public class FamousPlaceUtils {
             FamousPlace placeDetails = new FamousPlace();
             placeDetails.setFamousPlaceName(file.getName());
             placeDetails.setFamousPlaceImage(Uri.fromFile(file));
+            placeDetails.setMapImageId(android.R.drawable.ic_dialog_map);
             placeArrayList.add(placeDetails);
         }
 
@@ -87,6 +88,7 @@ public class FamousPlaceUtils {
                     FamousPlace placeDetails = new FamousPlace();
                     placeDetails.setFamousPlaceName(placeArrayList.get(i).getFamousPlaceName());
                     placeDetails.setFamousPlaceImage(placeArrayList.get(i).getFamousPlaceImage());
+                    placeDetails.setMapImageId(placeArrayList.get(i).getMapImageId());
                     placeDetails.setFamousPlaceDescription(text.toString());
                     placeArrayList.set(i,placeDetails);
                 }

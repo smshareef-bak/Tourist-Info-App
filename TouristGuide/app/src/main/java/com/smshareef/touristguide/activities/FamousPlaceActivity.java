@@ -16,14 +16,15 @@ import com.smshareef.touristguide.adapters.FamousPlaceRecyclerAdapter;
 import com.smshareef.touristguide.manager.FamousPlaceDataManager;
 import com.smshareef.touristguide.model.FamousPlace;
 import com.smshareef.touristguide.utils.FamousPlaceDataListener;
-import com.smshareef.touristguide.utils.OnRecyclerViewItemClickListener;
+import com.smshareef.touristguide.utils.OnRecyclerViewFamousPlaceClickListener;
 
 import java.util.ArrayList;
 
 import static com.smshareef.touristguide.utils.AppConstants.FAMOUS_PLACE;
+import static com.smshareef.touristguide.utils.AppConstants.KEY_PLACE;
 import static com.smshareef.touristguide.utils.AppConstants.RESOURCES_DIR;
 
-public class FamousPlaceActivity extends AppCompatActivity implements OnRecyclerViewItemClickListener, FamousPlaceDataListener {
+public class FamousPlaceActivity extends AppCompatActivity implements OnRecyclerViewFamousPlaceClickListener, FamousPlaceDataListener {
 
     //----------------------------------------------------------------------------------------------
     //Views
@@ -63,6 +64,7 @@ public class FamousPlaceActivity extends AppCompatActivity implements OnRecycler
             e.printStackTrace();
         }
 
+
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         famousPlaceRecyclerAdapter = new FamousPlaceRecyclerAdapter(this);
 
@@ -87,8 +89,19 @@ public class FamousPlaceActivity extends AppCompatActivity implements OnRecycler
     }
 
     @Override
-    public void onItemClicked(Bundle bundle) {
-        Toast.makeText(this, "Click on MAP icon to view location on Map", Toast.LENGTH_LONG).show();
+    public void onItemClicked(Bundle bundle, View view) {
+
+        if(view.getId() == R.id.imageButton){
+            Intent intent = new Intent(FamousPlaceActivity.this, FamousPlaceMapsActivity.class);
+            FamousPlace famousPlace = bundle.getParcelable(KEY_PLACE);
+            String famousPlaceName;
+            famousPlaceName = famousPlace.getFamousPlaceName();
+            intent.putExtra("famous_place_name",famousPlaceName);
+            FamousPlaceActivity.this.startActivity(intent);
+
+        } else {
+                Toast.makeText(this, "Please click on MAP icon to show place on map", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
