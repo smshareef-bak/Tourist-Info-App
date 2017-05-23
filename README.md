@@ -1,6 +1,6 @@
-#Tourist Info App
+# Tourist Info App
 
-##Steps to install the app:
+## Steps to install the app:
 
 1. Download and install the .apk file provided.
 2. Copy the folder ".touristGuideFiles" provided, to root of your sdcard/external storage.
@@ -8,7 +8,7 @@
 
 ## Directory "TouristGuide" is the project folder, to be opened using Android Studio.
 
-##Problem Statement :
+## Problem Statement :
 
 1. Create a logic screen which will only take user123@example.com as username and User@1234 as password. Login status should be maintained across.
 2. Create a screen which will show a grid of 8 cities: Delhi, Mumbai, Ahmedabad, Lucknow, Hyderabad, Bangalore, Chennai, Kolkata. One more grid will show a ‘+’ icon and show text “Add your local place”.
