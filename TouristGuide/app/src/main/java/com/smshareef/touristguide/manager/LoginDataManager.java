@@ -7,7 +7,7 @@ package com.smshareef.touristguide.manager;
  * Server / Firebase / Database etc.
  *
  * OnDataReadyListener is used to simulate loading of dummy data.
- * 
+ *
  * @author smshareef
  */
 
@@ -20,8 +20,8 @@ public class LoginDataManager {
     }
 
     public void getLoginData() {
-        String userID = "1";//"user123@example.com";
-        String password = "1";//"User@1234";
+        String userID = "user123@example.com";
+        String password = "User@1234";
 
         onLoginDataReadyListener.onLoginDataReady(userID,password);
     }

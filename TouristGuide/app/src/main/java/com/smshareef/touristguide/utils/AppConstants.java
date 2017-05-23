@@ -10,7 +10,7 @@ package com.smshareef.touristguide.utils;
 
 public class AppConstants {
 
-    public static final String RESOURCES_DIR = "TouristGuideFiles";
+    public static final String RESOURCES_DIR = ".touristGuideFiles";
     public static final String PLACES_IMAGE_DIR = "Places";
     public static final String KEY_POSITION = "position";
     public static final String KEY_PLACE = "place";
