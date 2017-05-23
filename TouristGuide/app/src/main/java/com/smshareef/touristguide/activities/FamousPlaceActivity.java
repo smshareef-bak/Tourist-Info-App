@@ -36,6 +36,10 @@ public class FamousPlaceActivity extends AppCompatActivity implements OnRecycler
 
     private RecyclerView recyclerView;
 
+    //----------------------------------------------------------------------------------------------
+    //Others
+    //----------------------------------------------------------------------------------------------
+
     private FamousPlaceRecyclerAdapter famousPlaceRecyclerAdapter;
     private static final int REQUEST_CODE = 102;
     private String placeName;
@@ -85,6 +89,8 @@ public class FamousPlaceActivity extends AppCompatActivity implements OnRecycler
 
         placeName = getIntent().getStringExtra("Place_Name");
 
+        setTitle( placeName + " Famous places");
+
         loadData();
     }
 
@@ -107,6 +113,8 @@ public class FamousPlaceActivity extends AppCompatActivity implements OnRecycler
             String famousPlaceName;
             famousPlaceName = famousPlace.getFamousPlaceName();
             intent.putExtra("famous_place_name",famousPlaceName);
+            placeName = getIntent().getStringExtra("Place_Name");
+            intent.putExtra("place_name",placeName);
             FamousPlaceActivity.this.startActivity(intent);
 
         } else {

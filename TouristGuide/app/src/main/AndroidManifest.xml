@@ -61,7 +61,8 @@
         </activity>
         <activity
             android:name=".activities.AddImageActivity"
-            android:parentActivityName=".activities.GalleryActivity" />
+            android:parentActivityName=".activities.GalleryActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".activities.GalleryFullScreenActivity"
             android:parentActivityName=".activities.GalleryActivity"

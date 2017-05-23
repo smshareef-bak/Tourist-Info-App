@@ -82,7 +82,7 @@ public class GalleryActivity extends AppCompatActivity implements OnRecyclerView
         recyclerView.setLayoutManager(gridLayoutManager);
 
         placeName = getIntent().getStringExtra("Place_Name");
-        setTitle(placeName + "Gallery");
+        setTitle(placeName + " Gallery");
 
         loadData();
     }

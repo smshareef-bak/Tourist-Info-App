@@ -55,8 +55,9 @@ public class FamousPlaceMapsActivity extends FragmentActivity implements OnMapRe
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
 
-        String location = FilenameUtils.removeExtension(getIntent().getStringExtra("famous_place_name"));
-        Toast.makeText(this, ""+location, Toast.LENGTH_SHORT).show();
+        String location = FilenameUtils.removeExtension(getIntent().getStringExtra("famous_place_name")) +", " +
+                FilenameUtils.removeExtension(getIntent().getStringExtra("place_name"));
+        Toast.makeText(this, "Searching "+location + "...", Toast.LENGTH_SHORT).show();
         if(location!=null && !location.equals("")) {
             new ShowOnMap().execute(location);
         }

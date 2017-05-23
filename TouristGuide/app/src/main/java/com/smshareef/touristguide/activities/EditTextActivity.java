@@ -96,13 +96,13 @@ public class EditTextActivity extends AppCompatActivity {
                 writer.append(text);
                 writer.flush();
                 writer.close();
+                Toast.makeText(this, "Description changed successfully", Toast.LENGTH_SHORT).show();
+                onBackPressed();
             } catch (IOException ioe) {
                 ioe.printStackTrace();
             }
-
         }
-        Toast.makeText(this, "Description changed successfully", Toast.LENGTH_SHORT).show();
-        onBackPressed();
+
         return super.onOptionsItemSelected(item);
     }
 }

@@ -25,7 +25,7 @@ import org.apache.commons.io.FilenameUtils;
 
     private ImageView mFamousPlaceImage;
     private TextView mFamousPlaceName;
-    private TextView mFamousPlaceDescription;
+    public TextView mFamousPlaceDescription;
     public ImageView mImageView;
     private Context context;
 
@@ -36,8 +36,6 @@ import org.apache.commons.io.FilenameUtils;
         this.mFamousPlaceName = (TextView) itemView.findViewById(R.id.famousPlacesNameTv);
         this.mFamousPlaceDescription = (TextView) itemView.findViewById(R.id.famousPlacesDescTv);
         this.mImageView = (ImageView) itemView.findViewById(R.id.imageButton);
-
-
     }
 
     void bindData(FamousPlace famousPlace) {

@@ -8,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -72,6 +73,8 @@ public class PlaceDetailsActivity extends AppCompatActivity {
                 .error(R.mipmap.ic_launcher_round)
                 .into(mImageView);
 
+        mTextView.setMovementMethod(new ScrollingMovementMethod());
+
         final String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + RESOURCES_DIR + "/" + placeName + "/" + IMAGE_DESC;
 
         //To read description file and display in a TextView
@@ -107,6 +110,7 @@ public class PlaceDetailsActivity extends AppCompatActivity {
             }
             bufferedReader.close();
             mTextView.setText(text.toString());
+
         }
         catch (Exception e)
         {

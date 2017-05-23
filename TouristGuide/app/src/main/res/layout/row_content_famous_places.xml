@@ -31,16 +31,19 @@
             android:layout_alignLeft="@+id/famousPlacesDescTv"
             android:layout_alignStart="@+id/famousPlacesDescTv" />
 
+
         <TextView
             android:id="@+id/famousPlacesDescTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:layout_below="@+id/famousPlacesNameTv"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:layout_toEndOf="@+id/famousPlacesIv"
             android:layout_toRightOf="@+id/famousPlacesIv"
-            android:layout_below="@+id/famousPlacesNameTv"
-            android:layout_marginStart="5dp"
-            android:layout_marginLeft="5dp"/>
+            android:maxLines="4" />
+
+
 
         <ImageView
             android:id="@+id/imageButton"

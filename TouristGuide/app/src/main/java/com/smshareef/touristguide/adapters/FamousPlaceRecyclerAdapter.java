@@ -30,6 +30,8 @@ public class FamousPlaceRecyclerAdapter extends RecyclerView.Adapter<FamousPlace
     private ArrayList<FamousPlace> famousPlaceArrayList;
     private OnRecyclerViewFamousPlaceClickListener onRecyclerViewItemClickListener;
 
+    int flag = 0;
+
     public FamousPlaceRecyclerAdapter(Context context) {
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.famousPlaceArrayList = new ArrayList<>();
@@ -81,6 +83,20 @@ public class FamousPlaceRecyclerAdapter extends RecyclerView.Adapter<FamousPlace
                 bundle.putInt(KEY_POSITION, holder.getAdapterPosition());
                 bundle.putParcelable(KEY_PLACE, famousPlaces);
                 onRecyclerViewItemClickListener.onItemClicked(bundle, v);
+            }
+        });
+
+        holder.mFamousPlaceDescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (flag == 0){
+                    flag = 1;
+                    holder.mFamousPlaceDescription.setMaxLines(100);
+                } else {
+                    flag = 0;
+                    holder.mFamousPlaceDescription.setMaxLines(4);
+                }
+
             }
         });
     }
