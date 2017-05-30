@@ -63,6 +63,12 @@ public class PlaceDetailsActivity extends AppCompatActivity {
         placeName = getIntent().getStringExtra("Place_Name");
         placeName = FilenameUtils.removeExtension(placeName);
         setTitle(placeName);
+        if(placeName.equals("Ahmedabad") || placeName.equals("Bengaluru") ||
+                placeName.equals("Chennai") || placeName.equals("Delhi") ||
+                placeName.equals("Hyderabad") || placeName.equals("Kolkata") ||
+                placeName.equals("Lucknow") || placeName.equals("Mumbai")) {
+            fabAddDesc.hide();
+        }
         placeImage = getIntent().getParcelableExtra("Place_Image");
         mImageView = (ImageView) findViewById(R.id.imageViewPlaceDetails);
         mTextView = (TextView) findViewById(R.id.textViewPlaceDetails);
