@@ -2,11 +2,11 @@
 
 ## Steps to install the app:
 
-1. Download and install the .apk file provided.
+1. Download and install the .apk file provided in the RELEASE section.
 2. Copy the folder ".touristGuideFiles" provided, to root of your sdcard/external storage.
 3. Run the app.
 
-## -> Directory "TouristGuide" is the project folder, to be opened using Android Studio.
+## NOTE: Directory "TouristGuide" is the project folder, to be opened using Android Studio.
 
 ## Problem Statement :
 
